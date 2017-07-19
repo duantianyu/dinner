@@ -4,13 +4,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
     <title>订餐提交</title>
+    <link rel="shortcut icon" href="{{ URL::asset('images/favicon.png') }}" type="image/x-icon">
     <link rel="stylesheet" href="{{ URL::asset('css/dinner.css') }}">
 </head>
 <body>
 
 <form method="post" class="bootstrap-frm">
     <h1>订餐提交
-        <span>快金员工订餐记录，请填写以下内容.{{ csrf_field() }}</span>
+        <span>快金员工订餐记录,请填写以下内容.{{ csrf_field() }}</span>
         <a class="top_bun button" href="{{ url('dinner/') }}" class="button">查看记录</a>
     </h1>
     <label>

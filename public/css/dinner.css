@@ -81,8 +81,8 @@ input, textarea, select{font-size: 14px;}
     background-color: #eeeeee;
     border-color: #eeeeee;
 }
-.bootstrap-frm .top_bun{position: absolute; right: 10px;top:15px;padding: 10px 20px; font-size: 16px}
-.bootstrap-frm .top_bun2{position: absolute; left: 10px;top:15px;padding: 10px 15px; font-size: 16px}
+.bootstrap-frm .top_bun{position: absolute; right: 10px;top:10px;padding: 8px 10px; font-size: 16px}
+.bootstrap-frm .top_bun2{position: absolute; left: 10px;top:10px;padding: 8px 10px; font-size: 16px}
 .msg{display:none;text-align: center;
     border-radius: 10px;
     border:1px solid #DDD;
