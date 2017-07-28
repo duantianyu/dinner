@@ -100,13 +100,14 @@ class DinnerController extends Controller
     public function export(){
         $time = date('Y-m-d', time() - 86400 * 10);
         $lists = DB::table('dinner')
+            ->select('week', 'time_kind', 'name', 'diner', 'amount', 'created_at')
             ->where('created_at', '>', $time)
             ->orderBy('week', 'desc')
             ->orderBy('name', 'desc')
             ->orderBy('created_at', 'desc')
             ->get();
 
-        $title = [['ID', '第几周', '时间餐种', '付款人', '金额', '用餐人', '提交时间', '修改时间']];
+        $title = [['第几周', '时间餐种', '付款人', '用餐人', '金额', '提交时间']];//'ID',  , '修改时间'
         $lists = json_decode(json_encode($lists), true);
         //dd($lists, $title);
         $cellData = array_merge($title, $lists);

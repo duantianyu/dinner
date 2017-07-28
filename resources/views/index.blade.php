@@ -18,10 +18,10 @@
     </h1>
 
     <table class="list" cellpadding="0" cellspacing="0">
-        <tr><th>ID</th><th>第几周</th><th>时间餐种</th><th>付款人</th><th>用餐人</th><th>金额</th><th>提交时间</th></tr>
+        <tr>{{--<th>ID</th>--}}<th>第几周</th><th>时间餐种</th><th>付款人</th><th>用餐人</th><th>金额</th><th>提交时间</th></tr>
         @foreach ($lists as $list)
             <tr>
-                <td>{{ $list->id }}</td>
+                {{--<td>{{ $list->id }}</td>--}}
                 <td>{{ $list->week }}</td>
                 <td>{{ $list->time_kind }}</td>
                 <td>{{ $list->name }}</td>
