@@ -14,7 +14,7 @@
     <h1>订餐记录
         <span class="nearly">近10天提交的记录</span>
         <a class="top_bun button" href="{{ url('dinner/create') }}" class="button">去提交</a>
-@if ($name == '聂淑昆') <a class="top_bun2 button" href="{{ url('dinner/export') }}" class="button">导出近10天</a>@endif
+@if ($name == '聂淑昆') <a class="top_bun2 button" href="{{ url('dinner/export') }}" class="button">导出近20天</a>@endif
     </h1>
 
     <table class="list" cellpadding="0" cellspacing="0">
