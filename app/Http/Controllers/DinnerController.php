@@ -98,7 +98,7 @@ class DinnerController extends Controller
     }
 
     public function export(){
-        $time = date('Y-m-d', time() - 86400 * 20);
+        $time = date('Y-m-d', time() - 86400 * 30);
         $lists = DB::table('dinner')
             ->select('week', 'time_kind', 'name', 'diner', 'amount', 'created_at')
             ->where('created_at', '>', $time)
