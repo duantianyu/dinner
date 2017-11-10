@@ -30,10 +30,10 @@
             <option @if($week == 3) selected='selected' @endif value="周三">周三</option>
             <option @if($week == 4) selected='selected' @endif value="周四">周四</option>
             <option @if($week == 5) selected='selected' @endif value="周五">周五</option>
-            <option @if($week == 6) selected='selected' @endif value="周六中餐">周六中餐</option>
-            <option value="周六晚餐">周六晚餐</option>
-            <option @if($week == 7) selected='selected' @endif value="周日中餐">周日中餐</option>
-            <option value="周日晚餐">周日晚餐</option>
+            {{--<option  value="周六中餐">周六中餐</option>--}}
+            <option @if($week == 6) selected='selected' @endif value="周六晚餐">周六晚餐</option>
+            {{--<option value="周日中餐">周日中餐</option>--}}
+            <option @if($week == 7) selected='selected' @endif value="周日晚餐">周日晚餐</option>
         </select>
     </label>
     <label>
