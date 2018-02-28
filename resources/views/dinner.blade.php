@@ -15,7 +15,7 @@
         <a class="top_bun button" href="{{ url('dinner/') }}" class="button">查看记录</a>
     </h1>
     <label>
-        <select name="week">
+        <select name="week" class="week">
             <option value="">请选择周</option>
             <option selected='selected' value="{{ $weeks }}">本周</option>
             <option value="{{ $last_week }}">上周</option>
@@ -23,19 +23,22 @@
         </select>
     </label>
     <label>
-        <select name="time_kind">
+        <select name="time_kind" class="time_kind">
             <option value="">请选择具体时间及餐种</option>
-            <option @if($week == 1) selected='selected' @endif value="周一">周一</option>
-            <option @if($week == 2) selected='selected' @endif value="周二">周二</option>
-            <option @if($week == 3) selected='selected' @endif value="周三">周三</option>
-            <option @if($week == 4) selected='selected' @endif value="周四">周四</option>
-            <option @if($week == 5) selected='selected' @endif value="周五">周五</option>
+            <option @if($week == 1) selected='selected' @endif value="周一" data="1">周一</option>
+            <option @if($week == 2) selected='selected' @endif value="周二" data="2">周二</option>
+            <option @if($week == 3) selected='selected' @endif value="周三" data="3">周三</option>
+            <option @if($week == 4) selected='selected' @endif value="周四" data="4">周四</option>
+            <option @if($week == 5) selected='selected' @endif value="周五" data="5">周五</option>
             {{--<option  value="周六中餐">周六中餐</option>--}}
-            <option @if($week == 6) selected='selected' @endif value="周六晚餐">周六晚餐</option>
+            <option @if($week == 6) selected='selected' @endif value="周六晚餐" data="6">周六晚餐</option>
             {{--<option value="周日中餐">周日中餐</option>--}}
-            <option @if($week == 7) selected='selected' @endif value="周日晚餐">周日晚餐</option>
+            <option @if($week == 7) selected='selected' @endif value="周日晚餐" data="7">周日晚餐</option>
         </select>
     </label>
+
+    <label><input type="text" name="dinner_date" id="dinner_date" readonly placeholder="用餐日期" value="" /></label>
+
     <label>
         <input type="text" name="name" placeholder="付款人" value="{{ $name }}" />
     </label>
@@ -57,6 +60,25 @@
 <script language="javascript" src="{{ URL::asset('js/adaptation.js') }}"></script>
 <script type="text/javascript">
     $(function(){
+        var data = eval('(' + '{!! $data !!}' + ')');
+        var selected_day = $('.time_kind option:selected').attr('data');
+        var selected_week = $('.week').val();
+        $('#dinner_date').val(data[selected_week][selected_day]);
+
+        $('.time_kind').change(function () {
+            change_date(data);
+        });
+        $('.week').change(function () {
+            change_date(data);
+        });
+
+
+        function change_date() {
+            var selected_day = $('.time_kind option:selected').attr('data');
+            var selected_week = $('.week').val();
+            $('#dinner_date').val(data[selected_week][selected_day]);
+        }
+
         var but = 1;
 
         $('.close').click(function () {
@@ -66,11 +88,12 @@
 
         $('input.button').click(function () {
             if(but == 1){
-                but =2;
+                but = 2;
                 var week = $("select[name='week']").val();
                 var time_kind = $("select[name='time_kind']").val();
                 var name = $("input[name='name']").val();
                 var amount = $("input[name='amount']").val();
+                var dinner_date = $("input[name='dinner_date']").val();
                 var diner = $("textarea").val();
                 var token = $("input[name='_token']").val();
 
@@ -84,7 +107,7 @@
                 //alert(week + ' ' + time_kind + ' ' + name + ' ' + amount + ' ' + diner);
                 $.post(
                     "{{ url("/dinner/store") }}",
-                    {week:week, time_kind:time_kind, name:name, amount:amount, diner:diner, _token:token},
+                    {week:week, time_kind:time_kind, name:name, amount:amount, dinner_date:dinner_date, diner:diner, _token:token},
                     function( data ) {
                         $('.info_con').text(data.info);
                         if(data.status == 1){

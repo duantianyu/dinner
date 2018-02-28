@@ -13,9 +13,10 @@ class Dinner extends Model
     public function create($data){
         $keys = implode(',', array_keys($data));
         $val  = array_values($data);
+        $tem  = rtrim(str_repeat('?, ', count($data)), ', ');
 
             //$res = DB::insert('insert into d_dinner (' . $keys . ') values (?, ?, ?, ?, ?)', $val);
-        $res = DB::insert('insert into d_dinner (' . $keys . ') values (?, ?, ?, ?, ?)
+        $res = DB::insert('insert into d_dinner (' . $keys . ') values (' . $tem . ')
               on duplicate key update updated_at=\'' . date('Y-m-d H:i:s') . '\'', $val);
 
 
