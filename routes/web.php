@@ -23,5 +23,6 @@ Route::get('dinner/create', 'DinnerController@create');
 Route::post('dinner/store', 'DinnerController@store');
 Route::get('dinner/show', 'DinnerController@show');
 Route::get('dinner/export', 'DinnerController@export');
+//Route::get('dinner/update_date', 'DinnerController@update_date');
 //Route::resource('dinner', 'DinnerController');
 

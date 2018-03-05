@@ -24,6 +24,39 @@ class DinnerController extends Controller
         return $data;
     }
 
+    //update date
+    public function update_date()
+    {
+        $lists = DB::table('dinner')
+            ->select('week', 'time_kind')
+            ->where('created_at', '>', '2018-01-01')
+            ->where('dinner_date', '=', '0000-00-00')
+            ->groupBy('week', 'time_kind')
+            ->get()
+            ->toArray();
+
+        $time_kind_week = [
+            '周一' => 1,
+            '周二' => 2,
+            '周三' => 3,
+            '周四' => 4,
+            '周五' => 5,
+            '周六' => 6,
+            '周六晚餐' => 6,
+            '周日' => 7,
+            '周日晚餐' => 7,
+        ];
+        foreach ($lists as $v) {
+            $date = date('Y-m-d', strtotime(date('Y') . '01' . '01') + (($v->week - 1) * 7 + $time_kind_week[$v->time_kind] - 1) * 86400);
+            DB::table('dinner')
+                ->where('week', '=', $v->week)
+                ->where('time_kind', '=', $v->time_kind)
+                ->update(['dinner_date' => $date]);
+
+        }
+        return 'ok';
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -118,6 +151,9 @@ class DinnerController extends Controller
 
     public function export()
     {
+        //select week '第几周', time_kind '时间餐种', name '付款人', diner '用餐人', amount '金额', created_at '提交时间', dinner_date '用餐日期' from d_dinner
+        //where dinner_date> '2017-01-07' and dinner_date< '2018-02-29'
+        //order by name desc, created_at desc;
         $time = date('Y-m-d', time() - 86400 * 30);
         $lists = DB::table('dinner')
             ->select('week', 'time_kind', 'name', 'diner', 'amount', 'created_at')
